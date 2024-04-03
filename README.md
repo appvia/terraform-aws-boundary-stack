@@ -2,7 +2,10 @@
 
 # Terraform AWS IAM Boundary Stack
 
-<img src="docs/boundary.drawio.png" alt="IAM Boundary" align="center"/>
+<p align="center">
+  </br></br>
+  <img src="docs/boundary.drawio.png" alt="IAM Boundary"/>
+</p>
 
 ## Description
 
