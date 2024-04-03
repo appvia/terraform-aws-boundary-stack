@@ -4,7 +4,7 @@
 
 ## Description
 
-The purpose of this module is to provide a convenient way to method of deploying IAM boundaries to all AWS accounts within an AWS Organization, including the management account. The method effectively wraps a cloudformation stackset, and deploy to the organization root. Note, since stacksets are not deployed to the management account, the same functionality is deployed your a single cloudformation stack.
+The purpose of this module is to provide a convenient method of deploying IAM boundaries to all AWS accounts within an AWS Organization, including the management account. The method effectively wraps a cloudformation stackset, and deploy to the organization root. Note, since stacksets are not deployed to the management account, the same functionality is deployed your a single cloudformation stack.
 
 ## Usage
 
