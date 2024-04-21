@@ -1,5 +1,4 @@
 
-data "aws_organizations_organization" "current" {}
 
 ## Create the default iam boundary used the pipelines
 # tfsec:ignore:aws-iam-no-policy-wildcards
