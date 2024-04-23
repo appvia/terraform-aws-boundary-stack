@@ -20,6 +20,12 @@ resource "aws_cloudformation_stack_set" "boundary" {
     enabled                          = true
     retain_stacks_on_account_removal = true
   }
+
+  lifecycle {
+    ignore_changes = [
+      administration_role_arn
+    ]
+  }
 }
 
 ## Deploy the permissive boundary to the organizational root 
