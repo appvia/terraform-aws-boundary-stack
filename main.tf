@@ -23,7 +23,8 @@ resource "aws_cloudformation_stack_set" "boundary" {
 
   lifecycle {
     ignore_changes = [
-      administration_role_arn
+      administration_role_arn,
+      outputs
     ]
   }
 }
