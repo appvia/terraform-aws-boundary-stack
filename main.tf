@@ -24,7 +24,6 @@ resource "aws_cloudformation_stack_set" "boundary" {
   lifecycle {
     ignore_changes = [
       administration_role_arn,
-      outputs
     ]
   }
 }
@@ -48,4 +47,10 @@ resource "aws_cloudformation_stack" "management" {
   parameters    = var.parameters
   tags          = var.tags
   template_body = var.template
+
+  lifecycle {
+    ignore_changes = [
+      outputs,
+    ]
+  }
 }
