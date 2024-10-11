@@ -82,6 +82,7 @@ No modules.
 | <a name="input_capabilities"></a> [capabilities](#input\_capabilities) | The capabilities required to deploy the cloudformation template | `list(string)` | <pre>[<br/>  "CAPABILITY_NAMED_IAM",<br/>  "CAPABILITY_AUTO_EXPAND",<br/>  "CAPABILITY_IAM"<br/>]</pre> | no |
 | <a name="input_enable_management_account"></a> [enable\_management\_account](#input\_enable\_management\_account) | Enable the deployment to the management account | `bool` | `false` | no |
 | <a name="input_max_concurrent_count"></a> [max\_concurrent\_count](#input\_max\_concurrent\_count) | The maximum number of concurrent deployments | `number` | `10` | no |
+| <a name="input_organization_units"></a> [organization\_units](#input\_organization\_units) | A list of organization units to deploy the boundary (defaults to all organization units) | `list(string)` | `[]` | no |
 | <a name="input_parameters"></a> [parameters](#input\_parameters) | The parameters to pass to the cloudformation template | `map(string)` | `{}` | no |
 
 ## Outputs
