@@ -1,6 +1,4 @@
 #
-# Copyright (C) 2024  Appvia Ltd <info@appvia.io>
-#  
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
 # as published by the Free Software Foundation; either version 2
@@ -14,9 +12,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-AUTHOR_EMAIL=info@appvia.io
 
-.PHONY: all security lint format documentation documentation-examples validate-all validate validate-examples init
+.PHONY: all security lint format documentation validate init commitlint
 
 default: all
 
@@ -31,11 +28,6 @@ all:
 documentation: 
 	@echo "--> Generating documentation"
 	@terraform-docs markdown table --output-file ${PWD}/README.md --output-mode inject .
-	$(MAKE) documentation-examples
-
-documentation-examples:
-	@echo "--> Generating documentation examples"
-	@find examples -type d -mindepth 1 -maxdepth 1 -exec terraform-docs markdown table --output-file README.md --output-mode inject {} \;
 
 init: 
 	@echo "--> Running terraform init"
@@ -43,52 +35,30 @@ init:
 
 security: 
 	@echo "--> Running Security checks"
-	@trivy config .
-	$(MAKE) security-examples
+	trivy config  --format table --exit-code  1 --severity  CRITICAL,HIGH --ignorefile .trivyignore .
 
-security-examples:
-	@echo "--> Running Security checks on examples"
-	@find examples -type d -mindepth 1 -maxdepth 1 | while read -r dir; do \
-		echo "--> Validating $$dir"; \
-		trivy config $$dir; \
-	done
-
-validate-all:
-	@echo "--> Running all validation checks"
-	$(MAKE) validate
-	$(MAKE) validate-examples
-
-validate:
-	@echo "--> Running terraform validate"
-	@terraform init -backend=false
-	@terraform validate
-	$(MAKE) validate-examples
-
-validate-examples:
-	@echo "--> Running terraform validate on examples"
-	@find examples -type d -mindepth 1 -maxdepth 1 | while read -r dir; do \
-		echo "--> Validating $$dir"; \
-		terraform -chdir=$$dir init; \
-		terraform -chdir=$$dir validate; \
-	done
+commitlint:
+	@echo "--> Running commitlint against the main branch"
+	@command -v commitlint >/dev/null 2>&1 || { echo "commitlint is not installed. Please install it by running 'npm install -g commitlint'"; exit 1; }
+	@git log --pretty=format:"%s" origin/main..HEAD | commitlint --from=origin/main
 
 lint:
 	@echo "--> Running tflint"
 	@tflint --init 
 	@tflint -f compact
-	$(MAKE) lint-examples
-
-lint-examples:
-	@echo "--> Running tflint on examples"
-	@find examples -type d -mindepth 1 -maxdepth 1 | while read -r dir; do \
-		echo "--> Linting $$dir"; \
-		tflint --chdir=$$dir --init; \
-		tflint --chdir=$$dir -f compact; \
-	done
 
 format: 
 	@echo "--> Running terraform fmt"
 	@terraform fmt -recursive -write=true
+
+validate:
+	@echo "--> Running terraform validate"
+	@terraform init -backend=false
+	@terraform validate
+	$(MAKE) lint 
+	$(MAKE) commitlint
+	$(MAKE) format
+	$(MAKE) security
 
 clean:
 	@echo "--> Cleaning up"

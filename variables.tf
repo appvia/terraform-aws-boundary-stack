@@ -15,6 +15,12 @@ variable "enable_management_account" {
   default     = false
 }
 
+variable "organization_units" {
+  description = "A list of organization units to deploy the boundary (defaults to all organization units)"
+  type        = list(string)
+  default     = []
+}
+
 variable "max_concurrent_count" {
   description = "The maximum number of concurrent deployments"
   type        = number
