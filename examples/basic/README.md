@@ -15,6 +15,7 @@ No providers.
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_boundary"></a> [boundary](#module\_boundary) | ../.. | n/a |
+| <a name="module_boundary_by_organization"></a> [boundary\_by\_organization](#module\_boundary\_by\_organization) | ../.. | n/a |
 
 ## Resources
 
