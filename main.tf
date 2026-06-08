@@ -31,6 +31,7 @@ resource "aws_cloudformation_stack_set" "boundary" {
 
 ## Deploy the permissive boundary to the organizational root
 resource "aws_cloudformation_stack_set_instance" "root" {
+  region = var.region
   deployment_targets {
     organizational_unit_ids = local.organizational_units
   }

@@ -28,7 +28,6 @@ module "boundary" {
   description               = "Used to deploy the default permissions boundary for the pipelines."
   enable_management_account = true
   name                      = "LZA-IAM-DefaultBoundary"
-  region                    = "us-west-2"
   tags                      = {}
   template                  = file("assets/default-boundary.yml")
   parameters                = {}
