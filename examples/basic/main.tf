@@ -13,6 +13,8 @@ module "boundary" {
   enable_management_account = true
   ## The name of the cloudformation stack 
   name = "LZA-IAM-DefaultBoundary-Sandbox"
+  ## The region to deploy the cloudformation template
+  region = "us-west-2"
   ## The tags to apply to the cloudformation stack
   tags = {}
   ## The cloudformation template to deploy
@@ -32,6 +34,8 @@ module "boundary_by_organization" {
   enable_management_account = true
   ## The name of the cloudformation stack
   name = "LZA-IAM-DefaultBoundary-Sandbox"
+  ## The region to deploy the cloudformation template
+  region = "us-west-2"
   ## The tags to apply to the cloudformation stack
   tags = {}
   ## The cloudformation template to deploy 
