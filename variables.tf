@@ -38,6 +38,11 @@ variable "parameters" {
   default     = {}
 }
 
+variable "region" {
+  description = "The region to deploy the cloudformation template"
+  type        = string
+}
+
 variable "tags" {
   description = "The tags to apply to the cloudformation stack"
   type        = map(string)
